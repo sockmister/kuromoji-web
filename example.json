@@ -1,0 +1,55 @@
+{
+  "input": "茹で上げて、水気を切る",
+  "mode": 0,
+  "tokens": [
+    {
+      "base": "茹でる",
+      "pos": "動詞,自立,*,*",
+      "pronunciation": "ユデ",
+      "reading": "ユデ",
+      "surface": "茹で"
+    },
+    {
+      "base": "上げる",
+      "pos": "動詞,非自立,*,*",
+      "pronunciation": "アゲ",
+      "reading": "アゲ",
+      "surface": "上げ"
+    },
+    {
+      "base": "て",
+      "pos": "助詞,接続助詞,*,*",
+      "pronunciation": "テ",
+      "reading": "テ",
+      "surface": "て"
+    },
+    {
+      "base": "、",
+      "pos": "記号,読点,*,*",
+      "pronunciation": "、",
+      "reading": "、",
+      "surface": "、"
+    },
+    {
+      "base": "水気",
+      "pos": "名詞,一般,*,*",
+      "pronunciation": "ミズケ",
+      "reading": "ミズケ",
+      "surface": "水気"
+    },
+    {
+      "base": "を",
+      "pos": "助詞,格助詞,一般,*",
+      "pronunciation": "ヲ",
+      "reading": "ヲ",
+      "surface": "を"
+    },
+    {
+      "base": "切る",
+      "pos": "動詞,自立,*,*",
+      "pronunciation": "キル",
+      "reading": "キル",
+      "surface": "切る"
+    }
+  ]
+}

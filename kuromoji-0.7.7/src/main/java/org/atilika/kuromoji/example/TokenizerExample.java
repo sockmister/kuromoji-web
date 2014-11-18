@@ -30,7 +30,7 @@ import org.atilika.kuromoji.Tokenizer.Mode;
 
 public class TokenizerExample {
 
-	public static void main(String[] args) throws IOException {		
+	public static void main(String[] args) throws IOException {
 		Tokenizer tokenizer;
 		// if (args.length == 1) {
 		// 	Mode mode = Mode.valueOf(args[0].toUpperCase());
@@ -49,12 +49,15 @@ public class TokenizerExample {
 		// line = reader.readLine();
 		// List<Token> result = tokenizer.tokenize(line);
 
-		List<Token> result = tokenizer.tokenize(args[0]);
+		for (int i = 0; i < args.length; i++){
+			List<Token> result = tokenizer.tokenize(args[i]);
 
-		// TODO printing here. format it nicely
-		for (Token token : result) {
-			System.out.println(token.getSurfaceForm() + "\t"
-					+ token.getAllFeatures());
+			System.out.println("sentence:");
+			System.out.println(args[i]);
+			for (Token token : result) {
+				System.out.println(token.getSurfaceForm() + "\t"
+						+ token.getAllFeatures());
+			}
 		}
 	}
 }

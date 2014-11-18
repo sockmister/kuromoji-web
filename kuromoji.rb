@@ -1,5 +1,7 @@
 require 'sinatra'
 require 'sinatra/json'
+require 'json'
+require 'pp'
 
 def translate_type(type)
   if type == "動詞"
@@ -30,20 +32,37 @@ end
 post '/' do
   content_type :json
 
-  command = "java -Dfile.encoding=UTF-8 -cp kuromoji-0.7.7/lib/kuromoji-0.7.7.jar:kuromoji-0.7.7/src/main/java org.atilika.kuromoji.example.TokenizerExample #{params["input"]}"
+  # parse form-data and call command
+  input_json = JSON.parse(params["input"])
+  command = "java -Dfile.encoding=UTF-8 -cp kuromoji-0.7.7/lib/kuromoji-0.7.7.jar:kuromoji-0.7.7/src/main/java org.atilika.kuromoji.example.TokenizerExample "
+  input_json.each do |sen|
+    sen = "\"#{sen}\" "
+    command << sen
+  end
   output = `#{command}`
+  puts output
 
-  tokens = output.split("\n")
+  # split by sentences
+  sentences = output.split("sentence:\n")
+  sentences = sentences[1..sentences.size]
+  
+  # process each sentences
+  overall_json = []
+  sentences.each do |sentence|
+    tokens = sentence.split("\n")
 
-  result_json = {}
-  result_json["input"] = tokens[0]
-  parsed_tokens = []
-  tokens = tokens[1..tokens.size]
-  tokens.each do |token|
-    parsed_token = parse_token(token)
-    parsed_tokens << parsed_token
+    result_json = {}
+    result_json["input"] = tokens[0]
+    parsed_tokens = []
+    tokens = tokens[1..tokens.size]
+    tokens.each do |token|
+      parsed_token = parse_token(token)
+      parsed_tokens << parsed_token
+    end
+
+    result_json["tokens"] = parsed_tokens
+    overall_json << result_json
   end
 
-  result_json["tokens"] = parsed_tokens
-  json result_json
+  json overall_json
 end

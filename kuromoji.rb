@@ -3,6 +3,10 @@ require 'sinatra/json'
 require 'json'
 require 'pp'
 
+before do
+  content_type :html, 'charset' => 'utf-8'
+end
+
 def translate_type(type)
   if type == "動詞"
     "verb"
@@ -40,12 +44,11 @@ post '/' do
     command << sen
   end
   output = `#{command}`
-  puts output
 
   # split by sentences
   sentences = output.split("sentence:\n")
   sentences = sentences[1..sentences.size]
-  
+
   # process each sentences
   overall_json = []
   sentences.each do |sentence|
